@@ -7,7 +7,7 @@
  * @param {vec3} a vector to calculate length of
  * @returns {Number} length of a
  */
-float vec3_length(float* a) {
+float vec3_length(vec3 a) {
     float x = a[0];
     float y = a[1];
     float z = a[2];
@@ -20,7 +20,7 @@ float vec3_length(float* a) {
  * @param {vec3} out the receiving vector
  * @param {vec3} a the source vector
  */
-void vec3_copy(float* dst, float* a) {
+void vec3_copy(vec3 dst, vec3 a) {
     dst[0] = a[0];
     dst[1] = a[1];
     dst[2] = a[2];
@@ -34,7 +34,7 @@ void vec3_copy(float* dst, float* a) {
  * @param {Number} y Y component
  * @param {Number} z Z component
  */
-void vec3_set(float* dst, float x, float y, float z) {
+void vec3_set(vec3 dst, float x, float y, float z) {
     dst[0] = x;
     dst[1] = y;
     dst[2] = z;
@@ -46,7 +46,7 @@ void vec3_set(float* dst, float x, float y, float z) {
  * @param {vec3} out the receiving vector
  * @param {vec3} b the second operand
  */
-void vec3_add(float* dst, float* b) {
+void vec3_add(vec3 dst, vec3 b) {
     dst[0] = dst[0] + b[0];
     dst[1] = dst[1] + b[1];
     dst[2] = dst[2] + b[2];
@@ -58,7 +58,7 @@ void vec3_add(float* dst, float* b) {
  * @param {vec3} out the receiving vector
  * @param {vec3} b the second operand
  */
-void vec3_subtract(float* dst, float* b) {
+void vec3_subtract(vec3 dst, vec3 b) {
     dst[0] = dst[0] - b[0];
     dst[1] = dst[1] - b[1];
     dst[2] = dst[2] - b[2];
@@ -70,7 +70,7 @@ void vec3_subtract(float* dst, float* b) {
  * @param {vec3} out the receiving vector
  * @param {vec3} b the second operand
  */
-void vec3_multiply(float* dst, float* b) {
+void vec3_multiply(vec3 dst, vec3 b) {
     dst[0] = dst[0] * b[0];
     dst[1] = dst[1] * b[1];
     dst[2] = dst[2] * b[2];
@@ -82,7 +82,7 @@ void vec3_multiply(float* dst, float* b) {
  * @param {vec3} out the receiving vector
  * @param {vec3} b the second operand
  */
-void vec3_divide(float* dst, float* b) {
+void vec3_divide(vec3 dst, vec3 b) {
     dst[0] = dst[0] / b[0];
     dst[1] = dst[1] / b[1];
     dst[2] = dst[2] / b[2];
@@ -93,7 +93,7 @@ void vec3_divide(float* dst, float* b) {
  *
  * @param {vec3} out the receiving vector
  */
-void vec3_ceil(float* dst) {
+void vec3_ceil(vec3 dst) {
     dst[0] = ceilf(dst[0]);
     dst[1] = ceilf(dst[1]);
     dst[2] = ceilf(dst[2]);
@@ -104,7 +104,7 @@ void vec3_ceil(float* dst) {
  *
  * @param {vec3} out the receiving vector
  */
-void vec3_floor(float* dst) {
+void vec3_floor(vec3 dst) {
     dst[0] = floorf(dst[0]);
     dst[1] = floorf(dst[1]);
     dst[2] = floorf(dst[2]);
@@ -116,7 +116,7 @@ void vec3_floor(float* dst) {
  * @param {vec3} out the receiving vector
  * @param {vec3} b the second operand
  */
-void vec3_min(float* dst, float* b) {
+void vec3_min(vec3 dst, vec3 b) {
     dst[0] = fmin(dst[0], b[0]);
     dst[1] = fmin(dst[1], b[1]);
     dst[2] = fmin(dst[2], b[2]);
@@ -128,7 +128,7 @@ void vec3_min(float* dst, float* b) {
  * @param {vec3} out the receiving vector
  * @param {vec3} b the second operand
  */
-void vec3_max(float* dst, float* b) {
+void vec3_max(vec3 dst, vec3 b) {
     dst[0] = fmax(dst[0], b[0]);
     dst[1] = fmax(dst[1], b[1]);
     dst[2] = fmax(dst[2], b[2]);
@@ -139,7 +139,7 @@ void vec3_max(float* dst, float* b) {
  *
  * @param {vec3} out the receiving vector
  */
-void vec3_round(float* dst) {
+void vec3_round(vec3 dst) {
     dst[0] = roundf(dst[0]);
     dst[1] = roundf(dst[1]);
     dst[2] = roundf(dst[2]);
@@ -151,7 +151,7 @@ void vec3_round(float* dst) {
  * @param {vec3} out the receiving vector
  * @param {Number} b amount to scale the vector by
  */
-void vec3_scale(float* dst, float b) {
+void vec3_scale(vec3 dst, float b) {
     dst[0] = dst[0] * b;
     dst[1] = dst[1] * b;
     dst[2] = dst[2] * b;
@@ -164,7 +164,7 @@ void vec3_scale(float* dst, float b) {
  * @param {vec3} b the second operand
  * @param {Number} scale the amount to scale b by before adding
  */
-void vec3_scaleAndAdd(float* dst, float* b, float scale) {
+void vec3_scaleAndAdd(vec3 dst, vec3 b, float scale) {
     dst[0] = dst[0] + (b[0] * scale);
     dst[1] = dst[1] + (b[1] * scale);
     dst[2] = dst[2] + (b[2] * scale);
@@ -177,7 +177,7 @@ void vec3_scaleAndAdd(float* dst, float* b, float scale) {
  * @param {vec3} b the second operand
  * @returns {Number} distance between a and b
  */
-float vec3_distance(float* a, float* b) {
+float vec3_distance(vec3 a, vec3 b) {
     float x = b[0] - a[0];
     float y = b[1] - a[1];
     float z = b[2] - a[2];
@@ -191,7 +191,7 @@ float vec3_distance(float* a, float* b) {
  * @param {vec3} b the second operand
  * @returns {Number} squared distance between a and b
  */
-float vec3_squaredDistance(float* a, float* b) {
+float vec3_squaredDistance(vec3 a, vec3 b) {
     float x = b[0] - a[0];
     float y = b[1] - a[1];
     float z = b[2] - a[2];
@@ -204,7 +204,7 @@ float vec3_squaredDistance(float* a, float* b) {
  * @param {vec3} a vector to calculate squared length of
  * @returns {Number} squared length of a
  */
-float vec3_squaredLength(float* a) {
+float vec3_squaredLength(vec3 a) {
     float x = a[0];
     float y = a[1];
     float z = a[2];
@@ -216,7 +216,7 @@ float vec3_squaredLength(float* a) {
  *
  * @param {vec3} out the receiving vector
  */
-void vec3_negate(float* dst) {
+void vec3_negate(vec3 dst) {
     dst[0] = -dst[0];
     dst[1] = -dst[1];
     dst[2] = -dst[2];
@@ -227,7 +227,7 @@ void vec3_negate(float* dst) {
  *
  * @param {vec3} out the receiving vector
  */
-void vec3_inverse(float* dst) {
+void vec3_inverse(vec3 dst) {
     dst[0] = 1.0 / dst[0];
     dst[1] = 1.0 / dst[1];
     dst[2] = 1.0 / dst[2];
@@ -238,7 +238,7 @@ void vec3_inverse(float* dst) {
  *
  * @param {vec3} out the receiving vector
  */
-void vec3_normalize(float* dst) {
+void vec3_normalize(vec3 dst) {
     float x = dst[0];
     float y = dst[1];
     float z = dst[2];
@@ -258,7 +258,7 @@ void vec3_normalize(float* dst) {
  * @param {vec3} b the second operand
  * @returns {Number} dot product of a and b
  */
-float vec3_dot(float* a, float* b) {
+float vec3_dot(vec3 a, vec3 b) {
     return a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
 }
 
@@ -268,7 +268,7 @@ float vec3_dot(float* a, float* b) {
  * @param {vec3} out the receiving vector
  * @param {vec3} b the second operand
  */
-void vec3_cross(float* dst, float* b) {
+void vec3_cross(vec3 dst, vec3 b) {
     float ax = dst[0], ay = dst[1], az = dst[2];
     float bx = b[0], by = b[1], bz = b[2];
 
@@ -284,7 +284,7 @@ void vec3_cross(float* dst, float* b) {
  * @param {vec3} b the second operand
  * @param {Number} t interpolation amount, in the range [0-1], between the two inputs
  */
-void vec3_lerp(float* dst, float* b, float t) {
+void vec3_lerp(vec3 dst, vec3 b, float t) {
     float ax = dst[0];
     float ay = dst[1];
     float az = dst[2];
@@ -302,7 +302,7 @@ void vec3_lerp(float* dst, float* b, float t) {
  * @param {vec3} d the fourth operand
  * @param {Number} t interpolation amount, in the range [0-1], between the two inputs
  */
-void vec3_hermite(float* dst, float* b, float* c, float* d, float t) {
+void vec3_hermite(vec3 dst, vec3 b, vec3 c, vec3 d, float t) {
     float factorTimes2 = t * t;
     float factor1 = factorTimes2 * (2 * t - 3) + 1;
     float factor2 = factorTimes2 * (t - 2) + t;
@@ -323,7 +323,7 @@ void vec3_hermite(float* dst, float* b, float* c, float* d, float t) {
  * @param {vec3} d the fourth operand
  * @param {Number} t interpolation amount, in the range [0-1], between the two inputs
  */
-void vec3_bezier(float* dst, float* b, float* c, float* d, float t) {
+void vec3_bezier(vec3 dst, vec3 b, vec3 c, vec3 d, float t) {
     float inverseFactor = 1 - t;
     float inverseFactorTimesTwo = inverseFactor * inverseFactor;
     float factorTimes2 = t * t;
@@ -344,7 +344,7 @@ void vec3_bezier(float* dst, float* b, float* c, float* d, float t) {
  * @param {vec3} out the receiving vector
  * @param {mat4} m matrix to transform with
  */
-void vec3_transformMat4(float* dst, float* m) {
+void vec3_transformMat4(vec3 dst, vec3 m) {
     float x = dst[0], y = dst[1], z = dst[2];
     float w = m[3] * x + m[7] * y + m[11] * z + m[15];
     w = w || 1.0;
@@ -359,7 +359,7 @@ void vec3_transformMat4(float* dst, float* m) {
  * @param {vec3} out the receiving vector
  * @param {mat3} m the 3x3 matrix to transform with
  */
-void vec3_transformMat3(float* dst, float* m) {
+void vec3_transformMat3(vec3 dst, vec3 m) {
     float x = dst[0], y = dst[1], z = dst[2];
     dst[0] = x * m[0] + y * m[3] + z * m[6];
     dst[1] = x * m[1] + y * m[4] + z * m[7];
@@ -373,7 +373,7 @@ void vec3_transformMat3(float* dst, float* m) {
  * @param {vec3} out the receiving vector
  * @param {quat} q quaternion to transform with
  */
-void vec3_transformQuat(float* dst, float* q) {
+void vec3_transformQuat(vec3 dst, vec3 q) {
     // benchmarks: https://jsperf.com/quaternion-transform-vec3-implementations-fixed
     float qx = q[0], qy = q[1], qz = q[2], qw = q[3];
     float x = dst[0], y = dst[1], z = dst[2];
@@ -395,7 +395,7 @@ void vec3_transformQuat(float* dst, float* q) {
     uuvx *= 2;
     uuvy *= 2;
     uuvz *= 2;
-    // return vec3.add(float* dst, a, vec3.add(float* dst, uv, uuv));
+    // return vec3.add(vec3 dst, a, vec3.add(vec3 dst, uv, uuv));
     dst[0] = x + uvx + uuvx;
     dst[1] = y + uvy + uuvy;
     dst[2] = z + uvz + uuvz;
@@ -407,7 +407,7 @@ void vec3_transformQuat(float* dst, float* q) {
  * @param {vec3} b The origin of the rotation
  * @param {Number} c The angle of rotation
  */
-void vec3_rotateX(float* dst, float* b, float c) {
+void vec3_rotateX(vec3 dst, vec3 b, float c) {
     float p[3], r[3];
     //Translate point to the origin
     p[0] = dst[0] - b[0];
@@ -431,7 +431,7 @@ void vec3_rotateX(float* dst, float* b, float c) {
  * @param {vec3} b The origin of the rotation
  * @param {Number} c The angle of rotation
  */
-void vec3_rotateY(float* dst, float* b, float c) {
+void vec3_rotateY(vec3 dst, vec3 b, float c) {
     float p[3], r[3];
     //Translate point to the origin
     p[0] = dst[0] - b[0];
@@ -455,7 +455,7 @@ void vec3_rotateY(float* dst, float* b, float c) {
  * @param {vec3} b The origin of the rotation
  * @param {Number} c The angle of rotation
  */
-void vec3_rotateZ(float* dst, float* b, float c) {
+void vec3_rotateZ(vec3 dst, vec3 b, float c) {
     float p[3], r[3];
     //Translate point to the origin
     p[0] = dst[0] - b[0];
@@ -479,7 +479,7 @@ void vec3_rotateZ(float* dst, float* b, float c) {
  * @param {vec3} b The second operand
  * @returns {Number} The angle in radians
  */
-float vec3_angle(float* a, float* b) {
+float vec3_angle(vec3 a, vec3 b) {
     float tempA[3];
     float tempB[3];
     tempA[0] = a[0], tempA[1] = a[1], tempA[2] = a[2];
@@ -507,6 +507,6 @@ float vec3_angle(float* a, float* b) {
  * @param {vec3} b The second vector.
  * @returns {Boolean} True if the vectors are equal, false otherwise.
  */
-uint8_t vec3_equals(float* a, float* b) {
+uint8_t vec3_equals(vec3 a, vec3 b) {
     return a[0] == b[0] && a[1] == b[1] && a[2] == b[2];
 }
