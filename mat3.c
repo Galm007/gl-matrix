@@ -7,7 +7,7 @@
  * @param {mat3} out the receiving 3x3 matrix
  * @param {mat4} a   the source 4x4 matrix
  */
-void mat3_fromMat4(float* dst, float* a) {
+void mat3_fromMat4(mat3 dst, mat4 a) {
     dst[0] = a[0];
     dst[1] = a[1];
     dst[2] = a[2];
@@ -25,7 +25,7 @@ void mat3_fromMat4(float* dst, float* a) {
  * @param {mat3} out the receiving matrix
  * @param {mat3} a the source matrix
  */
-void mat3_copy(float* dst, float* a) {
+void mat3_copy(mat3 dst, mat3 a) {
     dst[0] = a[0];
     dst[1] = a[1];
     dst[2] = a[2];
@@ -51,7 +51,7 @@ void mat3_copy(float* dst, float* a) {
  * @param {Number} m21 Component in column 2, row 1 position (index 7)
  * @param {Number} m22 Component in column 2, row 2 position (index 8)
  */
-void mat3_set(float* dst, float m00, float m01, float m02, float m10, float m11, float m12, float m20, float m21, float m22) {
+void mat3_set(mat3 dst, float m00, float m01, float m02, float m10, float m11, float m12, float m20, float m21, float m22) {
     dst[0] = m00;
     dst[1] = m01;
     dst[2] = m02;
@@ -68,7 +68,7 @@ void mat3_set(float* dst, float m00, float m01, float m02, float m10, float m11,
  *
  * @param {mat3} out the receiving matrix
  */
-void mat3_identity(float* dst) {
+void mat3_identity(mat3 dst) {
     dst[0] = 1;
     dst[1] = 0;
     dst[2] = 0;
@@ -85,7 +85,7 @@ void mat3_identity(float* dst) {
  *
  * @param {mat3} out the receiving matrix
  */
-void mat3_transpose(float* dst) {
+void mat3_transpose(mat3 dst) {
     // If we are transposing ourselves we can skip a few steps but have to cache some values
     float a01 = dst[1], a02 = dst[2], a12 = dst[5];
     dst[1] = dst[3];
@@ -102,7 +102,7 @@ void mat3_transpose(float* dst) {
  * @param {mat3} out the receiving matrix
  * @returns {mat3} out
  */
-void mat3_invert(float* dst) {
+void mat3_invert(mat3 dst) {
     float a00 = dst[0], a01 = dst[1], a02 = dst[2];
     float a10 = dst[3], a11 = dst[4], a12 = dst[5];
     float a20 = dst[6], a21 = dst[7], a22 = dst[8];
@@ -135,7 +135,7 @@ void mat3_invert(float* dst) {
  *
  * @param {mat3} out the receiving matrix
  */
-void mat3_adjoint(float* dst) {
+void mat3_adjoint(mat3 dst) {
     float a00 = dst[0], a01 = dst[1], a02 = dst[2];
     float a10 = dst[3], a11 = dst[4], a12 = dst[5];
     float a20 = dst[6], a21 = dst[7], a22 = dst[8];
@@ -157,7 +157,7 @@ void mat3_adjoint(float* dst) {
  * @param {mat3} a the source matrix
  * @returns {Number} determinant of a
  */
-float mat3_determinant(float* dst) {
+float mat3_determinant(mat3 dst) {
     float a00 = dst[0], a01 = dst[1], a02 = dst[2];
     float a10 = dst[3], a11 = dst[4], a12 = dst[5];
     float a20 = dst[6], a21 = dst[7], a22 = dst[8];
@@ -171,7 +171,7 @@ float mat3_determinant(float* dst) {
  * @param {mat3} out the receiving matrix
  * @param {mat3} b the second operand
  */
-void mat3_multiply(float* dst, float* b) {
+void mat3_multiply(mat3 dst, mat3 b) {
     float a00 = dst[0], a01 = dst[1], a02 = dst[2];
     float a10 = dst[3], a11 = dst[4], a12 = dst[5];
     float a20 = dst[6], a21 = dst[7], a22 = dst[8];
@@ -199,7 +199,7 @@ void mat3_multiply(float* dst, float* b) {
  * @param {mat3} out the receiving matrix
  * @param {vec2} v vector to translate by
  */
-void mat3_translate(float* dst, float* v) {
+void mat3_translate(mat3 dst, vec2 v) {
     float a00 = dst[0], a01 = dst[1], a02 = dst[2],
         a10 = dst[3], a11 = dst[4], a12 = dst[5],
         a20 = dst[6], a21 = dst[7], a22 = dst[8],
@@ -224,7 +224,7 @@ void mat3_translate(float* dst, float* v) {
  * @param {mat3} out the receiving matrix
  * @param {Number} rad the angle to rotate the matrix by
  */
-void mat3_rotate(float* dst, float rad) {
+void mat3_rotate(mat3 dst, float rad) {
     float a00 = dst[0], a01 = dst[1], a02 = dst[2],
         a10 = dst[3], a11 = dst[4], a12 = dst[5],
         a20 = dst[6], a21 = dst[7], a22 = dst[8],
@@ -251,7 +251,7 @@ void mat3_rotate(float* dst, float rad) {
  * @param {mat3} out the receiving matrix
  * @param {vec2} v the vec2 to scale the matrix by
  **/
-void mat3_scale(float* dst, float* v) {
+void mat3_scale(mat3 dst, vec2 v) {
     float x = v[0], y = v[1];
 
     dst[0] = x * dst[0];
@@ -277,7 +277,7 @@ void mat3_scale(float* dst, float* v) {
  * @param {mat3} out mat3 receiving operation result
  * @param {vec2} v Translation vector
  */
-void mat3_fromTranslation(float* dst, float* v) {
+void mat3_fromTranslation(mat3 dst, vec2 v) {
     dst[0] = 1;
     dst[1] = 0;
     dst[2] = 0;
@@ -300,7 +300,7 @@ void mat3_fromTranslation(float* dst, float* v) {
  * @param {Number} rad the angle to rotate the matrix by
  * @returns {mat3} out
  */
-void mat3_fromRotation(float* dst, float rad) {
+void mat3_fromRotation(mat3 dst, float rad) {
     float s = sinf(rad), c = cosf(rad);
 
     dst[0] = c;
@@ -326,7 +326,7 @@ void mat3_fromRotation(float* dst, float rad) {
  * @param {mat3} out mat3 receiving operation result
  * @param {vec2} v Scaling vector
  */
-void mat3_fromScaling(float* dst, float* v) {
+void mat3_fromScaling(mat3 dst, vec2 v) {
     dst[0] = v[0];
     dst[1] = 0;
     dst[2] = 0;
@@ -346,7 +346,7 @@ void mat3_fromScaling(float* dst, float* v) {
  * @param {mat3} out the receiving matrix
  * @param {mat2d} a the matrix to copy
  **/
-void mat3_fromMat2d(float* dst, float* a) {
+void mat3_fromMat2d(mat3 dst, mat2 a) {
     dst[0] = a[0];
     dst[1] = a[1];
     dst[2] = 0;
@@ -366,7 +366,7 @@ void mat3_fromMat2d(float* dst, float* a) {
 * @param {mat3} out mat3 receiving operation result
 * @param {quat} q Quaternion to create matrix from
 */
-void mat3_fromQuat(float* dst, float* q) {
+void mat3_fromQuat(mat3 dst, quat q) {
     float x = q[0], y = q[1], z = q[2], w = q[3];
     float x2 = x + x;
     float y2 = y + y;
@@ -401,7 +401,7 @@ void mat3_fromQuat(float* dst, float* q) {
 * @param {mat3} out mat3 receiving operation result
 * @param {mat4} a Mat4 to derive the normal matrix from
 */
-void mat3_normalFromMat4(float* dst, float* a) {
+void mat3_normalFromMat4(mat3 dst, mat4 a) {
     float a00 = a[0], a01 = a[1], a02 = a[2], a03 = a[3];
     float a10 = a[4], a11 = a[5], a12 = a[6], a13 = a[7];
     float a20 = a[8], a21 = a[9], a22 = a[10], a23 = a[11];
@@ -448,7 +448,7 @@ void mat3_normalFromMat4(float* dst, float* a) {
  * @param {number} width Width of your gl context
  * @param {number} height Height of gl context
  */
-void mat3_projection(float* dst, float width, float height) {
+void mat3_projection(mat3 dst, float width, float height) {
     dst[0] = 2 / width;
     dst[1] = 0;
     dst[2] = 0;
@@ -466,7 +466,7 @@ void mat3_projection(float* dst, float width, float height) {
  * @param {mat3} a the matrix to calculate Frobenius norm of
  * @returns {Number} Frobenius norm
  */
-float mat3_frob(float* a) {
+float mat3_frob(mat3 a) {
   return (sqrtf(powf(a[0], 2) + powf(a[1], 2) + powf(a[2], 2) + powf(a[3], 2) + powf(a[4], 2) + powf(a[5], 2) + powf(a[6], 2) + powf(a[7], 2) + powf(a[8], 2)));
 }
 
@@ -476,7 +476,7 @@ float mat3_frob(float* a) {
  * @param {mat3} out the receiving matrix
  * @param {mat3} b the second operand
  */
-void mat3_add(float* dst, float* b) {
+void mat3_add(mat3 dst, mat3 b) {
     dst[0] = dst[0] + b[0];
     dst[1] = dst[1] + b[1];
     dst[2] = dst[2] + b[2];
@@ -494,7 +494,7 @@ void mat3_add(float* dst, float* b) {
  * @param {mat3} out the receiving matrix
  * @param {mat3} b the second operand
  */
-void mat3_subtract(float* dst, float* b) {
+void mat3_subtract(mat3 dst, mat3 b) {
     dst[0] = dst[0] - b[0];
     dst[1] = dst[1] - b[1];
     dst[2] = dst[2] - b[2];
@@ -512,7 +512,7 @@ void mat3_subtract(float* dst, float* b) {
  * @param {mat3} out the receiving matrix
  * @param {Number} b amount to scale the matrix's elements by
  */
-void mat3_multiplyScalar(float* dst, float b) {
+void mat3_multiplyScalar(mat3 dst, float b) {
     dst[0] = dst[0] * b;
     dst[1] = dst[1] * b;
     dst[2] = dst[2] * b;
@@ -531,7 +531,7 @@ void mat3_multiplyScalar(float* dst, float b) {
  * @param {mat3} b the second operand
  * @param {Number} scale the amount to scale b's elements by before adding
  */
-void mat3_multiplyScalarAndAdd(float* dst, float* b, float scale) {
+void mat3_multiplyScalarAndAdd(mat3 dst, mat3 b, float scale) {
     dst[0] = dst[0] + (b[0] * scale);
     dst[1] = dst[1] + (b[1] * scale);
     dst[2] = dst[2] + (b[2] * scale);
@@ -550,7 +550,7 @@ void mat3_multiplyScalarAndAdd(float* dst, float* b, float scale) {
  * @param {mat3} b The second matrix.
  * @returns {uint8_t} 1 if the matrices are equal, 0 otherwise.
  */
-uint8_t mat3_equals(float* a, float* b) {
+uint8_t mat3_equals(mat3 a, mat3 b) {
     return a[0] == b[0] && a[1] == b[1] && a[2] == b[2] &&
         a[3] == b[3] && a[4] == b[4] && a[5] == b[5] &&
         a[6] == b[6] && a[7] == b[7] && a[8] == b[8];

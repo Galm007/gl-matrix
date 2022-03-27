@@ -344,7 +344,7 @@ void vec3_bezier(vec3 dst, vec3 b, vec3 c, vec3 d, float t) {
  * @param {vec3} out the receiving vector
  * @param {mat4} m matrix to transform with
  */
-void vec3_transformMat4(vec3 dst, vec3 m) {
+void vec3_transformMat4(vec3 dst, mat4 m) {
     float x = dst[0], y = dst[1], z = dst[2];
     float w = m[3] * x + m[7] * y + m[11] * z + m[15];
     w = w || 1.0;
@@ -359,7 +359,7 @@ void vec3_transformMat4(vec3 dst, vec3 m) {
  * @param {vec3} out the receiving vector
  * @param {mat3} m the 3x3 matrix to transform with
  */
-void vec3_transformMat3(vec3 dst, vec3 m) {
+void vec3_transformMat3(vec3 dst, mat3 m) {
     float x = dst[0], y = dst[1], z = dst[2];
     dst[0] = x * m[0] + y * m[3] + z * m[6];
     dst[1] = x * m[1] + y * m[4] + z * m[7];
@@ -373,7 +373,7 @@ void vec3_transformMat3(vec3 dst, vec3 m) {
  * @param {vec3} out the receiving vector
  * @param {quat} q quaternion to transform with
  */
-void vec3_transformQuat(vec3 dst, vec3 q) {
+void vec3_transformQuat(vec3 dst, quat q) {
     // benchmarks: https://jsperf.com/quaternion-transform-vec3-implementations-fixed
     float qx = q[0], qy = q[1], qz = q[2], qw = q[3];
     float x = dst[0], y = dst[1], z = dst[2];

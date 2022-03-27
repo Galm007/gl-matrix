@@ -4,7 +4,7 @@
 #include <float.h>
 #include <stdio.h>
 
-void mat4_dump(float dst[16]) {
+void mat4_dump(mat4 dst) {
     if (!dst) {
         fprintf(stderr, "mat4_dump(): undefined matrix\n");
         return;
@@ -19,7 +19,7 @@ void mat4_dump(float dst[16]) {
     fprintf(stderr, "\n");
 }
 
-void mat4_identity(float dst[16]) {
+void mat4_identity(mat4 dst) {
     dst[0] = 1;
     dst[1] = 0;
     dst[2] = 0;
@@ -38,7 +38,7 @@ void mat4_identity(float dst[16]) {
     dst[15] = 1;
 }
 
-void mat4_copy(float* dst, float* src) {
+void mat4_copy(mat4 dst, mat4 src) {
     dst[0] = src[0];
     dst[1] = src[1];
     dst[2] = src[2];
@@ -57,7 +57,7 @@ void mat4_copy(float* dst, float* src) {
     dst[15] = src[15];
 }
 
-void mat4_set(float* dst, float m00, float m01, float m02, float m03, float m10, float m11, float m12, float m13, float m20, float m21, float m22, float m23, float m30, float m31, float m32, float m33) {
+void mat4_set(mat4 dst, float m00, float m01, float m02, float m03, float m10, float m11, float m12, float m13, float m20, float m21, float m22, float m23, float m30, float m31, float m32, float m33) {
     dst[0] = m00;
     dst[1] = m01;
     dst[2] = m02;
@@ -76,7 +76,7 @@ void mat4_set(float* dst, float m00, float m01, float m02, float m03, float m10,
     dst[15] = m33;
 }
 
-void mat4_transpose(float* dst) {
+void mat4_transpose(mat4 dst) {
     float a01 = dst[1], a02 = dst[2], a03 = dst[3];
     float a12 = dst[6], a13 = dst[7];
     float a23 = dst[11];
@@ -95,7 +95,7 @@ void mat4_transpose(float* dst) {
     dst[14] = a23;
 }
 
-void mat4_invert(float* dst) {
+void mat4_invert(mat4 dst) {
     float a00 = dst[0], a01 = dst[1], a02 = dst[2], a03 = dst[3];
     float a10 = dst[4], a11 = dst[5], a12 = dst[6], a13 = dst[7];
     float a20 = dst[8], a21 = dst[9], a22 = dst[10], a23 = dst[11];
@@ -139,7 +139,7 @@ void mat4_invert(float* dst) {
     dst[15] = (a20 * b03 - a21 * b01 + a22 * b00) * det;
 }
 
-void mat4_adjoint(float* dst) {
+void mat4_adjoint(mat4 dst) {
     float a00 = dst[0], a01 = dst[1], a02 = dst[2], a03 = dst[3];
     float a10 = dst[4], a11 = dst[5], a12 = dst[6], a13 = dst[7];
     float a20 = dst[8], a21 = dst[9], a22 = dst[10], a23 = dst[11];
@@ -163,7 +163,7 @@ void mat4_adjoint(float* dst) {
     dst[15] =  (a00 * (a11 * a22 - a12 * a21) - a10 * (a01 * a22 - a02 * a21) + a20 * (a01 * a12 - a02 * a11));
 }
 
-float mat4_determinant(float* dst) {
+float mat4_determinant(mat4 dst) {
     float a00 = dst[0], a01 = dst[1], a02 = dst[2], a03 = dst[3];
     float a10 = dst[4], a11 = dst[5], a12 = dst[6], a13 = dst[7];
     float a20 = dst[8], a21 = dst[9], a22 = dst[10], a23 = dst[11];
@@ -185,7 +185,7 @@ float mat4_determinant(float* dst) {
     return b00 * b11 - b01 * b10 + b02 * b09 + b03 * b08 - b04 * b07 + b05 * b06;
 }
 
-void mat4_multiply(float* dst, float* b) {
+void mat4_multiply(mat4 dst, mat4 b) {
     float a00 = dst[0], a01 = dst[1], a02 = dst[2], a03 = dst[3];
     float a10 = dst[4], a11 = dst[5], a12 = dst[6], a13 = dst[7];
     float a20 = dst[8], a21 = dst[9], a22 = dst[10], a23 = dst[11];
@@ -217,7 +217,7 @@ void mat4_multiply(float* dst, float* b) {
     dst[15] = b0*a03 + b1*a13 + b2*a23 + b3*a33;
 }
 
-void mat4_translate(float dst[16], float v[3]) {
+void mat4_translate(mat4 dst, vec3 v) {
     float x = v[0], y = v[1], z = v[2];
     dst[12] = dst[0] * x + dst[4] * y + dst[8] * z + dst[12];
     dst[13] = dst[1] * x + dst[5] * y + dst[9] * z + dst[13];
@@ -225,14 +225,14 @@ void mat4_translate(float dst[16], float v[3]) {
     dst[15] = dst[3] * x + dst[7] * y + dst[11] * z + dst[15];
 }
 
-void mat4_translatef(float dst[16], float x, float y, float z) {
+void mat4_translatef(mat4 dst, float x, float y, float z) {
     dst[12] = dst[0] * x + dst[4] * y + dst[8] * z + dst[12];
     dst[13] = dst[1] * x + dst[5] * y + dst[9] * z + dst[13];
     dst[14] = dst[2] * x + dst[6] * y + dst[10] * z + dst[14];
     dst[15] = dst[3] * x + dst[7] * y + dst[11] * z + dst[15];
 }
 
-void mat4_scale(float* dst, float* v) {
+void mat4_scale(mat4 dst, vec3 v) {
     float x = v[0], y = v[1], z = v[2];
 
     dst[0] = dst[0] * x;
@@ -253,7 +253,7 @@ void mat4_scale(float* dst, float* v) {
     dst[15] = dst[15];
 }
 
-void mat4_rotate(float* dst, float rad, float* axis) {
+void mat4_rotate(mat4 dst, float rad, vec3 axis) {
     float x = axis[0], y = axis[1], z = axis[2];
     float len = sqrtf(x * x + y * y + z * z);
     float s, c, t;
@@ -299,7 +299,7 @@ void mat4_rotate(float* dst, float rad, float* axis) {
     dst[11] = a03 * b20 + a13 * b21 + a23 * b22;
 }
 
-void mat4_rotateX(float* dst, float rad) {
+void mat4_rotateX(mat4 dst, float rad) {
     float s = sinf(rad);
     float c = cosf(rad);
     float a10 = dst[4];
@@ -322,7 +322,7 @@ void mat4_rotateX(float* dst, float rad) {
     dst[11] = a23 * c - a13 * s;
 }
 
-void mat4_rotateY(float* dst, float rad) {
+void mat4_rotateY(mat4 dst, float rad) {
     float s = sinf(rad);
     float c = cosf(rad);
     float a00 = dst[0];
@@ -345,7 +345,7 @@ void mat4_rotateY(float* dst, float rad) {
     dst[11] = a03 * s + a23 * c;
 }
 
-void mat4_rotateZ(float* dst, float rad) {
+void mat4_rotateZ(mat4 dst, float rad) {
     float s = sinf(rad);
     float c = cosf(rad);
     float a00 = dst[0];
@@ -368,7 +368,7 @@ void mat4_rotateZ(float* dst, float rad) {
     dst[7] = a13 * c - a03 * s;
 }
 
-void mat4_fromTranslation(float* dst, float* v) {
+void mat4_fromTranslation(mat4 dst, vec3 v) {
     dst[0] = 1;
     dst[1] = 0;
     dst[2] = 0;
@@ -387,7 +387,7 @@ void mat4_fromTranslation(float* dst, float* v) {
     dst[15] = 1;
 }
 
-void mat4_fromScaling(float* dst, float* v) {
+void mat4_fromScaling(mat4 dst, vec3 v) {
     dst[0] = v[0];
     dst[1] = 0;
     dst[2] = 0;
@@ -406,7 +406,7 @@ void mat4_fromScaling(float* dst, float* v) {
     dst[15] = 1;
 }
 
-void mat4_fromRotation(float* dst, float rad, float* axis) {
+void mat4_fromRotation(mat4 dst, float rad, vec3 axis) {
     float x = axis[0], y = axis[1], z = axis[2];
     float len = sqrtf(x * x + y * y + z * z);
     float s, c, t;
@@ -441,7 +441,7 @@ void mat4_fromRotation(float* dst, float rad, float* axis) {
     dst[15] = 1;
 }
 
-void mat4_fromXRotation(float* dst, float rad) {
+void mat4_fromXRotation(mat4 dst, float rad) {
     float s = sinf(rad);
     float c = cosf(rad);
 
@@ -464,7 +464,7 @@ void mat4_fromXRotation(float* dst, float rad) {
     dst[15] = 1;
 }
 
-void mat4_fromYRotation(float* dst, float rad) {
+void mat4_fromYRotation(mat4 dst, float rad) {
     float s = sinf(rad);
     float c = cosf(rad);
 
@@ -487,7 +487,7 @@ void mat4_fromYRotation(float* dst, float rad) {
     dst[15] = 1;
 }
 
-void mat4_fromZRotation(float* dst, float rad) {
+void mat4_fromZRotation(mat4 dst, float rad) {
     float s = sinf(rad);
     float c = cosf(rad);
 
@@ -510,7 +510,7 @@ void mat4_fromZRotation(float* dst, float rad) {
     dst[15] = 1;
 }
 
-void mat4_fromRotationTranslation(float* dst, float* q, float* v) {
+void mat4_fromRotationTranslation(mat4 dst, quat q, vec3 v) {
     // Quaternion math
     float x = q[0], y = q[1], z = q[2], w = q[3];
     float x2 = x + x;
@@ -545,13 +545,13 @@ void mat4_fromRotationTranslation(float* dst, float* q, float* v) {
     dst[15] = 1;
 }
 
-void mat4_getTranslation(float* dst, float* mat) {
+void mat4_getTranslation(vec3 dst, mat4 mat) {
     dst[0] = mat[12];
     dst[1] = mat[13];
     dst[2] = mat[14];
 }
 
-void mat4_getScaling(float* dst, float* mat) {
+void mat4_getScaling(vec3 dst, mat4 mat) {
     float m11 = mat[0];
     float m12 = mat[1];
     float m13 = mat[2];
@@ -567,7 +567,7 @@ void mat4_getScaling(float* dst, float* mat) {
     dst[2] = sqrtf(m31 * m31 + m32 * m32 + m33 * m33);
 }
 
-void mat4_getRotation(float* dst, float* mat) {
+void mat4_getRotation(quat dst, mat4 mat) {
     // Algorithm taken from http://www.euclideanspace.com/maths/geometry/rotations/conversions/matrixToQuaternion/index.htm
     float trace = mat[0] + mat[5] + mat[10];
     float S = 0;
@@ -602,7 +602,7 @@ void mat4_getRotation(float* dst, float* mat) {
     }
 }
 
-void mat4_fromRotationTranslationScale(float* dst, float* q, float* v, float* s) {
+void mat4_fromRotationTranslationScale(mat4 dst, quat q, vec3 v, vec3 s) {
     // Quaternion math
     float x = q[0], y = q[1], z = q[2], w = q[3];
     float x2 = x + x;
@@ -640,7 +640,7 @@ void mat4_fromRotationTranslationScale(float* dst, float* q, float* v, float* s)
     dst[15] = 1;
 }
 
-void mat4_fromRotationTranslationScaleOrigin(float* dst, float* q, float* v, float* s, float* o) {
+void mat4_fromRotationTranslationScaleOrigin(mat4 dst, quat q, vec3 v, vec3 s, vec3 o) {
     // Quaternion math
     float x = q[0], y = q[1], z = q[2], w = q[3];
     float x2 = x + x;
@@ -693,7 +693,7 @@ void mat4_fromRotationTranslationScaleOrigin(float* dst, float* q, float* v, flo
     dst[15] = 1;
 }
 
-void mat4_fromQuat(float* dst, float* q) {
+void mat4_fromQuat(mat4 dst, quat q) {
     float x = q[0], y = q[1], z = q[2], w = q[3];
     float x2 = x + x;
     float y2 = y + y;
@@ -730,7 +730,7 @@ void mat4_fromQuat(float* dst, float* q) {
     dst[15] = 1;
 }
 
-void mat4_frustum(float* dst, float left, float right, float bottom, float top, float near, float far) {
+void mat4_frustum(mat4 dst, float left, float right, float bottom, float top, float near, float far) {
     float rl = 1 / (right - left);
     float tb = 1 / (top - bottom);
     float nf = 1 / (near - far);
@@ -752,7 +752,7 @@ void mat4_frustum(float* dst, float left, float right, float bottom, float top, 
     dst[15] = 0;
 }
 
-void mat4_perspective(float* dst, float fovy, float aspect, float near, float far) {
+void mat4_perspective(mat4 dst, float fovy, float aspect, float near, float far) {
     float f = 1.0 / tanf(fovy / 2), nf;
     dst[0] = f / aspect;
     dst[1] = 0;
@@ -779,7 +779,7 @@ void mat4_perspective(float* dst, float fovy, float aspect, float near, float fa
     }
 }
 
-void mat4_ortho(float* dst, float left, float right, float bottom, float top, float near, float far) {
+void mat4_ortho(mat4 dst, float left, float right, float bottom, float top, float near, float far) {
     float lr = 1 / (left - right);
     float bt = 1 / (bottom - top);
     float nf = 1 / (near - far);
@@ -801,7 +801,7 @@ void mat4_ortho(float* dst, float left, float right, float bottom, float top, fl
     dst[15] = 1;
 }
 
-void mat4_lookAt(float* dst, float* eye, float* center, float* up) {
+void mat4_lookAt(mat4 dst, vec3 eye, vec3 center, vec3 up) {
     float x0, x1, x2, y0, y1, y2, z0, z1, z2, len;
     float eyex = eye[0];
     float eyey = eye[1];
@@ -878,7 +878,7 @@ void mat4_lookAt(float* dst, float* eye, float* center, float* up) {
     dst[15] = 1;
 }
 
-void mat4_targetTo(float* dst, float* eye, float* target, float* up) {
+void mat4_targetTo(mat4 dst, vec3 eye, vec3 target, vec3 up) {
     float eyex = eye[0],
         eyey = eye[1],
         eyez = eye[2],
@@ -928,11 +928,11 @@ void mat4_targetTo(float* dst, float* eye, float* target, float* up) {
     dst[15] = 1;
 };
 
-float mat4_frob(float* a) {
+float mat4_frob(mat4 a) {
     return (sqrtf(powf(a[0], 2) + powf(a[1], 2) + powf(a[2], 2) + powf(a[3], 2) + powf(a[4], 2) + powf(a[5], 2) + powf(a[6], 2) + powf(a[7], 2) + powf(a[8], 2) + powf(a[9], 2) + powf(a[10], 2) + powf(a[11], 2) + powf(a[12], 2) + powf(a[13], 2) + powf(a[14], 2) + powf(a[15], 2) ));
 }
 
-void mat4_add(float* dst, float* b) {
+void mat4_add(mat4 dst, mat4 b) {
     dst[0] = dst[0] + b[0];
     dst[1] = dst[1] + b[1];
     dst[2] = dst[2] + b[2];
@@ -951,7 +951,7 @@ void mat4_add(float* dst, float* b) {
     dst[15] = dst[15] + b[15];
 }
 
-void mat4_subtract(float* dst, float* b) {
+void mat4_subtract(mat4 dst, mat4 b) {
     dst[0] = dst[0] - b[0];
     dst[1] = dst[1] - b[1];
     dst[2] = dst[2] - b[2];
@@ -970,7 +970,7 @@ void mat4_subtract(float* dst, float* b) {
     dst[15] = dst[15] - b[15];
 }
 
-void mat4_multiplyScalar(float* dst, float b) {
+void mat4_multiplyScalar(mat4 dst, float b) {
     dst[0] = dst[0] * b;
     dst[1] = dst[1] * b;
     dst[2] = dst[2] * b;
@@ -989,7 +989,7 @@ void mat4_multiplyScalar(float* dst, float b) {
     dst[15] = dst[15] * b;
 }
 
-void mat4_multiplyScalarAndAdd(float* dst, float* b, float scale) {
+void mat4_multiplyScalarAndAdd(mat4 dst, mat4  b, float scale) {
     dst[0] = dst[0] + (b[0] * scale);
     dst[1] = dst[1] + (b[1] * scale);
     dst[2] = dst[2] + (b[2] * scale);
@@ -1008,7 +1008,7 @@ void mat4_multiplyScalarAndAdd(float* dst, float* b, float scale) {
     dst[15] = dst[15] + (b[15] * scale);
 }
 
-uint8_t mat4_equals(float* a, float* b) {
+uint8_t mat4_equals(mat4 a, mat4 b) {
     return a[0] == b[0] && a[1] == b[1] && a[2] == b[2] && a[3] == b[3] &&
         a[4] == b[4] && a[5] == b[5] && a[6] == b[6] && a[7] == b[7] &&
         a[8] == b[8] && a[9] == b[9] && a[10] == b[10] && a[11] == b[11] &&

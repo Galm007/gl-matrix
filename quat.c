@@ -7,7 +7,7 @@
  *
  * @param {quat} out the receiving quaternion
  */
-void quat_identity(float* dst) {
+void quat_identity(quat dst) {
     dst[0] = 0;
     dst[1] = 0;
     dst[2] = 0;
@@ -22,7 +22,7 @@ void quat_identity(float* dst) {
  * @param {vec3} axis the axis around which to rotate
  * @param {Number} rad the angle in radians
  **/
-void quat_setAxisAngle(float* dst, float* axis, float rad) {
+void quat_setAxisAngle(quat dst, vec3 axis, float rad) {
     rad = rad * 0.5;
     float s = sinf(rad);
     dst[0] = s * axis[0];
@@ -44,7 +44,7 @@ void quat_setAxisAngle(float* dst, float* axis, float rad) {
  * @param  {quat} q     Quaternion to be decomposed
  * @return {Number}     Angle, in radians, of the rotation
  */
-float quat_getAxisAngle(float* out_axis, float* q) {
+float quat_getAxisAngle(vec3 out_axis, quat q) {
     float rad = acosf(q[3]) * 2.0;
     float s = sinf(rad / 2.0);
     if (s > EPSILON) {
@@ -67,7 +67,7 @@ float quat_getAxisAngle(float* out_axis, float* q) {
  * @param {quat} out the receiving quaternion
  * @param {quat} b the second operand
  */
-void quat_multiply(float* dst, float* b) {
+void quat_multiply(quat dst, quat b) {
     float ax = dst[0], ay = dst[1], az = dst[2], aw = dst[3];
     float bx = b[0], by = b[1], bz = b[2], bw = b[3];
 
@@ -83,7 +83,7 @@ void quat_multiply(float* dst, float* b) {
  * @param {quat} out quat receiving operation result
  * @param {number} rad angle (in radians) to rotate
  */
-void quat_rotateX(float* dst, float rad) {
+void quat_rotateX(quat dst, float rad) {
     rad *= 0.5;
 
     float ax = dst[0], ay = dst[1], az = dst[2], aw = dst[3];
@@ -101,7 +101,7 @@ void quat_rotateX(float* dst, float rad) {
  * @param {quat} out quat receiving operation result
  * @param {number} rad angle (in radians) to rotate
  */
-void quat_rotateY(float* dst, float rad) {
+void quat_rotateY(quat dst, float rad) {
     rad *= 0.5;
 
     float ax = dst[0], ay = dst[1], az = dst[2], aw = dst[3];
@@ -119,7 +119,7 @@ void quat_rotateY(float* dst, float rad) {
  * @param {quat} out quat receiving operation result
  * @param {number} rad angle (in radians) to rotate
  */
-void quat_rotateZ(float* dst, float rad) {
+void quat_rotateZ(quat dst, float rad) {
     rad *= 0.5;
 
     float ax = dst[0], ay = dst[1], az = dst[2], aw = dst[3];
@@ -138,7 +138,7 @@ void quat_rotateZ(float* dst, float rad) {
  *
  * @param {quat} out the receiving quaternion
  */
-void quat_calculateW(float* dst) {
+void quat_calculateW(quat dst) {
     float x = dst[0], y = dst[1], z = dst[2];
 
     dst[0] = x;
@@ -154,7 +154,7 @@ void quat_calculateW(float* dst) {
  * @param {quat} b the second operand
  * @param {Number} t interpolation amount, in the range [0-1], between the two inputs
  */
-void quat_slerp(float* dst, float* b, float t) {
+void quat_slerp(quat dst, quat b, float t) {
     // benchmarks:
     //    http://jsperf.com/quaternion-slerp-implementations
     float ax = dst[0], ay = dst[1], az = dst[2], aw = dst[3];
@@ -198,7 +198,7 @@ void quat_slerp(float* dst, float* b, float t) {
  *
  * @param {quat} out the receiving quaternion
  */
-void quat_invert(float* dst) {
+void quat_invert(quat dst) {
     float a0 = dst[0], a1 = dst[1], a2 = dst[2], a3 = dst[3];
     float dot = a0*a0 + a1*a1 + a2*a2 + a3*a3;
     float invDot = dot ? 1.0/dot : 0;
@@ -218,7 +218,7 @@ void quat_invert(float* dst) {
  * @param {quat} out the receiving quaternion
  * @param {quat} a quat to calculate conjugate of
  */
-void quat_conjugate(float* dst) {
+void quat_conjugate(quat dst) {
     dst[0] = -dst[0];
     dst[1] = -dst[1];
     dst[2] = -dst[2];
@@ -234,7 +234,7 @@ void quat_conjugate(float* dst) {
  * @param {quat} out the receiving quaternion
  * @param {mat3} m rotation matrix
  */
-void quat_fromMat3(float* dst, float* m) {
+void quat_fromMat3(quat dst, mat3 m) {
     // Algorithm in Ken Shoemake's article in 1987 SIGGRAPH course notes
     // article "Quaternion Calculus and Fast Animation".
     float fTrace = m[0] + m[4] + m[8];
@@ -276,7 +276,7 @@ void quat_fromMat3(float* dst, float* m) {
  * @param {y} Angle to rotate around Y axis in degrees.
  * @param {z} Angle to rotate around Z axis in degrees.
  */
-void quat_fromEuler(float* dst, float x, float y, float z) {
+void quat_fromEuler(quat dst, float x, float y, float z) {
     float halfToRad = 0.5 * M_PI / 180.0;
     x *= halfToRad;
     y *= halfToRad;

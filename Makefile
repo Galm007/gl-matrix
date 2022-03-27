@@ -13,6 +13,7 @@ gl-matrix.a: $(OBJECTS)
 	ar -crs $@ $(OBJECTS)
 
 gl-matrix.h: $(OBJECTS)
+	cat typedefs.h > $@
 	cat $(HEADERS) > $@
 
 clean:

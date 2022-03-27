@@ -2,13 +2,14 @@
 #define QUAT_H
 
 #include <stdint.h>
+#include "typedefs.h"
 
 /**
  * Set a quat to the identity quaternion
  *
  * @param {quat} out the receiving quaternion
  */
-void quat_identity(float* dst);
+void quat_identity(quat dst);
 
 /**
  * Sets a quat from the given angle and rotation axis,
@@ -18,7 +19,7 @@ void quat_identity(float* dst);
  * @param {vec3} axis the axis around which to rotate
  * @param {Number} rad the angle in radians
  **/
-void quat_setAxisAngle(float* dst, float* axis, float rad);
+void quat_setAxisAngle(quat dst, vec3 axis, float rad);
 
 /**
  * Gets the rotation axis and angle for a given
@@ -33,7 +34,7 @@ void quat_setAxisAngle(float* dst, float* axis, float rad);
  * @param  {quat} q     Quaternion to be decomposed
  * @return {Number}     Angle, in radians, of the rotation
  */
-float quat_getAxisAngle(float* out_axis, float* q);
+float quat_getAxisAngle(vec3 out_axis, quat q);
 
 /**
  * Multiplies two quat's
@@ -41,7 +42,7 @@ float quat_getAxisAngle(float* out_axis, float* q);
  * @param {quat} out the receiving quaternion
  * @param {quat} b the second operand
  */
-void quat_multiply(float* dst, float* b);
+void quat_multiply(quat dst, quat b);
 
 /**
  * Rotates a quaternion by the given angle about the X axis
@@ -49,7 +50,7 @@ void quat_multiply(float* dst, float* b);
  * @param {quat} out quat receiving operation result
  * @param {number} rad angle (in radians) to rotate
  */
-void quat_rotateX(float* dst, float rad);
+void quat_rotateX(quat dst, float rad);
 
 /**
  * Rotates a quaternion by the given angle about the Y axis
@@ -57,7 +58,7 @@ void quat_rotateX(float* dst, float rad);
  * @param {quat} out quat receiving operation result
  * @param {number} rad angle (in radians) to rotate
  */
-void quat_rotateY(float* dst, float rad);
+void quat_rotateY(quat dst, float rad);
 
 /**
  * Rotates a quaternion by the given angle about the Z axis
@@ -65,7 +66,7 @@ void quat_rotateY(float* dst, float rad);
  * @param {quat} out quat receiving operation result
  * @param {number} rad angle (in radians) to rotate
  */
-void quat_rotateZ(float* dst, float rad);
+void quat_rotateZ(quat dst, float rad);
 
 /**
  * Calculates the W component of a quat from the X, Y, and Z components.
@@ -74,7 +75,7 @@ void quat_rotateZ(float* dst, float rad);
  *
  * @param {quat} out the receiving quaternion
  */
-void quat_calculateW(float* dst);
+void quat_calculateW(quat dst);
 
 /**
  * Performs a spherical linear interpolation between two quat
@@ -83,14 +84,14 @@ void quat_calculateW(float* dst);
  * @param {quat} b the second operand
  * @param {Number} t interpolation amount, in the range [0-1], between the two inputs
  */
-void quat_slerp(float* dst, float* b, float t);
+void quat_slerp(quat dst, quat b, float t);
 
 /**
  * Calculates the inverse of a quat
  *
  * @param {quat} out the receiving quaternion
  */
-void quat_invert(float* dst);
+void quat_invert(quat dst);
 
 /**
  * Calculates the conjugate of a quat
@@ -99,7 +100,7 @@ void quat_invert(float* dst);
  * @param {quat} out the receiving quaternion
  * @param {quat} a quat to calculate conjugate of
  */
-void quat_conjugate(float* dst);
+void quat_conjugate(quat dst);
 
 /**
  * Creates a quaternion from the given 3x3 rotation matrix.
@@ -110,7 +111,7 @@ void quat_conjugate(float* dst);
  * @param {quat} out the receiving quaternion
  * @param {mat3} m rotation matrix
  */
-void quat_fromMat3(float* dst, float* m);
+void quat_fromMat3(quat dst, mat3 m);
 
 /**
  * Creates a quaternion from the given euler angle x, y, z.
@@ -120,6 +121,6 @@ void quat_fromMat3(float* dst, float* m);
  * @param {y} Angle to rotate around Y axis in degrees.
  * @param {z} Angle to rotate around Z axis in degrees.
  */
-void quat_fromEuler(float* dst, float x, float y, float z);
+void quat_fromEuler(quat dst, float x, float y, float z);
 
 #endif

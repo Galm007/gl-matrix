@@ -2,6 +2,7 @@
 #define MAT3_H
 
 #include <stdint.h>
+#include "typedefs.h"
 
 /**
  * Copies the upper-left 3x3 values into the given mat3.
@@ -9,7 +10,7 @@
  * @param {mat3} out the receiving 3x3 matrix
  * @param {mat4} a   the source 4x4 matrix
  */
-void mat3_fromMat4(float* dst, float* a);
+void mat3_fromMat4(mat3 dst, mat4 a);
 
 /**
  * Copy the values from one mat3 to another
@@ -17,7 +18,7 @@ void mat3_fromMat4(float* dst, float* a);
  * @param {mat3} out the receiving matrix
  * @param {mat3} a the source matrix
  */
-void mat3_copy(float* dst, float* a);
+void mat3_copy(mat3 dst, mat3 a);
 
 /**
  * Set the components of a mat3 to the given values
@@ -33,21 +34,21 @@ void mat3_copy(float* dst, float* a);
  * @param {Number} m21 Component in column 2, row 1 position (index 7)
  * @param {Number} m22 Component in column 2, row 2 position (index 8)
  */
-void mat3_set(float* dst, float m00, float m01, float m02, float m10, float m11, float m12, float m20, float m21, float m22);
+void mat3_set(mat3 dst, float m00, float m01, float m02, float m10, float m11, float m12, float m20, float m21, float m22);
 
 /**
  * Set a mat3 to the identity matrix
  *
  * @param {mat3} out the receiving matrix
  */
-void mat3_identity(float* dst);
+void mat3_identity(mat3 dst);
 
 /**
  * Transpose the values of a mat3
  *
  * @param {mat3} out the receiving matrix
  */
-void mat3_transpose(float* dst);
+void mat3_transpose(mat3 dst);
 
 /**
  * Inverts a mat3
@@ -55,14 +56,14 @@ void mat3_transpose(float* dst);
  * @param {mat3} out the receiving matrix
  * @returns {mat3} out
  */
-void mat3_invert(float* dst);
+void mat3_invert(mat3 dst);
 
 /**
  * Calculates the adjugate of a mat3
  *
  * @param {mat3} out the receiving matrix
  */
-void mat3_adjoint(float* dst);
+void mat3_adjoint(mat3 dst);
 
 /**
  * Calculates the determinant of a mat3
@@ -70,7 +71,7 @@ void mat3_adjoint(float* dst);
  * @param {mat3} a the source matrix
  * @returns {Number} determinant of a
  */
-float mat3_determinant(float* dst);
+float mat3_determinant(mat3 dst);
 
 /**
  * Multiplies two mat3's
@@ -78,7 +79,7 @@ float mat3_determinant(float* dst);
  * @param {mat3} out the receiving matrix
  * @param {mat3} b the second operand
  */
-void mat3_multiply(float* dst, float* b);
+void mat3_multiply(mat3 dst, mat3 b);
 
 /**
  * Translate a mat3 by the given vector
@@ -86,7 +87,7 @@ void mat3_multiply(float* dst, float* b);
  * @param {mat3} out the receiving matrix
  * @param {vec2} v vector to translate by
  */
-void mat3_translate(float* dst, float* v);
+void mat3_translate(mat3 dst, vec2 v);
 
 /**
  * Rotates a mat3 by the given angle
@@ -94,7 +95,7 @@ void mat3_translate(float* dst, float* v);
  * @param {mat3} out the receiving matrix
  * @param {Number} rad the angle to rotate the matrix by
  */
-void mat3_rotate(float* dst, float rad);
+void mat3_rotate(mat3 dst, float rad);
 
 /**
  * Scales the mat3 by the dimensions in the given vec2
@@ -102,7 +103,7 @@ void mat3_rotate(float* dst, float rad);
  * @param {mat3} out the receiving matrix
  * @param {vec2} v the vec2 to scale the matrix by
  **/
-void mat3_scale(float* dst, float* v);
+void mat3_scale(mat3 dst, vec2 v);
 
 /**
  * Creates a matrix from a vector translation
@@ -114,7 +115,7 @@ void mat3_scale(float* dst, float* v);
  * @param {mat3} out mat3 receiving operation result
  * @param {vec2} v Translation vector
  */
-void mat3_fromTranslation(float* dst, float* v);
+void mat3_fromTranslation(mat3 dst, vec2 v);
 
 /**
  * Creates a matrix from a given angle
@@ -127,7 +128,7 @@ void mat3_fromTranslation(float* dst, float* v);
  * @param {Number} rad the angle to rotate the matrix by
  * @returns {mat3} out
  */
-void mat3_fromRotation(float* dst, float rad);
+void mat3_fromRotation(mat3 dst, float rad);
 
 /**
  * Creates a matrix from a vector scaling
@@ -139,7 +140,7 @@ void mat3_fromRotation(float* dst, float rad);
  * @param {mat3} out mat3 receiving operation result
  * @param {vec2} v Scaling vector
  */
-void mat3_fromScaling(float* dst, float* v);
+void mat3_fromScaling(mat3 dst, vec2 v);
 
 /**
  * Copies the values from a mat2d into a mat3
@@ -147,7 +148,7 @@ void mat3_fromScaling(float* dst, float* v);
  * @param {mat3} out the receiving matrix
  * @param {mat2d} a the matrix to copy
  **/
-void mat3_fromMat2d(float* dst, float* a);
+void mat3_fromMat2d(mat3 dst, mat2 a);
 
 /**
 * Calculates a 3x3 matrix from the given quaternion
@@ -155,7 +156,7 @@ void mat3_fromMat2d(float* dst, float* a);
 * @param {mat3} out mat3 receiving operation result
 * @param {quat} q Quaternion to create matrix from
 */
-void mat3_fromQuat(float* dst, float* q);
+void mat3_fromQuat(mat3 dst, quat q);
 
 /**
 * Calculates a 3x3 normal matrix (transpose inverse) from the 4x4 matrix
@@ -163,7 +164,7 @@ void mat3_fromQuat(float* dst, float* q);
 * @param {mat3} out mat3 receiving operation result
 * @param {mat4} a Mat4 to derive the normal matrix from
 */
-void mat3_normalFromMat4(float* dst, float* a);
+void mat3_normalFromMat4(mat3 dst, mat4 a);
 
 /**
  * Generates a 2D projection matrix with the given bounds
@@ -172,7 +173,7 @@ void mat3_normalFromMat4(float* dst, float* a);
  * @param {number} width Width of your gl context
  * @param {number} height Height of gl context
  */
-void mat3_projection(float* dst, float width, float height);
+void mat3_projection(mat3 dst, float width, float height);
 
 /**
  * Returns Frobenius norm of a mat3
@@ -180,7 +181,7 @@ void mat3_projection(float* dst, float width, float height);
  * @param {mat3} a the matrix to calculate Frobenius norm of
  * @returns {Number} Frobenius norm
  */
-float mat3_frob(float* a);
+float mat3_frob(mat3 a);
 
 /**
  * Adds two mat3's
@@ -188,7 +189,7 @@ float mat3_frob(float* a);
  * @param {mat3} out the receiving matrix
  * @param {mat3} b the second operand
  */
-void mat3_add(float* dst, float* b);
+void mat3_add(mat3 dst, mat3 b);
 
 /**
  * Subtracts matrix b from matrix a
@@ -196,7 +197,7 @@ void mat3_add(float* dst, float* b);
  * @param {mat3} out the receiving matrix
  * @param {mat3} b the second operand
  */
-void mat3_subtract(float* dst, float* b);
+void mat3_subtract(mat3 dst, mat3 b);
 
 /**
  * Multiply each element of the matrix by a scalar.
@@ -204,7 +205,7 @@ void mat3_subtract(float* dst, float* b);
  * @param {mat3} out the receiving matrix
  * @param {Number} b amount to scale the matrix's elements by
  */
-void mat3_multiplyScalar(float* dst, float b);
+void mat3_multiplyScalar(mat3 dst, float b);
 
 /**
  * Adds two mat3's after multiplying each element of the second operand by a scalar value.
@@ -213,7 +214,7 @@ void mat3_multiplyScalar(float* dst, float b);
  * @param {mat3} b the second operand
  * @param {Number} scale the amount to scale b's elements by before adding
  */
-void mat3_multiplyScalarAndAdd(float* dst, float* b, float scale);
+void mat3_multiplyScalarAndAdd(mat3 dst, mat3 b, float scale);
 
 /**
  * Returns whether or not the matrices have exactly the same elements.
@@ -222,6 +223,6 @@ void mat3_multiplyScalarAndAdd(float* dst, float* b, float scale);
  * @param {mat3} b The second matrix.
  * @returns {uint8_t} 1 if the matrices are equal, 0 otherwise.
  */
-uint8_t mat3_equals(float* a, float* b);
+uint8_t mat3_equals(mat3 a, mat3 b);
 
 #endif

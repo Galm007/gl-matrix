@@ -2,8 +2,7 @@
 #define VEC3_H
 
 #include <stdint.h>
-
-typedef float vec3[3];
+#include "typedefs.h"
 
 /**
  * Calculates the length of a vec3
@@ -219,7 +218,7 @@ void vec3_bezier(vec3 dst, vec3 b, vec3 c, vec3 d, float t);
  * @param {vec3} out the receiving vector
  * @param {mat4} m matrix to transform with
  */
-void vec3_transformMat4(vec3 dst, vec3 m);
+void vec3_transformMat4(vec3 dst, mat4 m);
 
 /**
  * Transforms the vec3 with a mat3.
@@ -227,7 +226,7 @@ void vec3_transformMat4(vec3 dst, vec3 m);
  * @param {vec3} out the receiving vector
  * @param {mat3} m the 3x3 matrix to transform with
  */
-void vec3_transformMat3(vec3 dst, vec3 m);
+void vec3_transformMat3(vec3 dst, mat3 m);
 
 /**
  * Transforms the vec3 with a quat
@@ -236,7 +235,7 @@ void vec3_transformMat3(vec3 dst, vec3 m);
  * @param {vec3} out the receiving vector
  * @param {quat} q quaternion to transform with
  */
-void vec3_transformQuat(vec3 dst, vec3 q);
+void vec3_transformQuat(vec3 dst, quat q);
 
 /**
  * Rotate a 3D vector around the x-axis

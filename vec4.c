@@ -7,7 +7,7 @@
  * @param {vec4} out the receiving vector
  * @param {vec4} a the source vector
  */
-void vec4_copy(float* dst, float* a) {
+void vec4_copy(vec4 dst, vec4 a) {
     dst[0] = a[0];
     dst[1] = a[1];
     dst[2] = a[2];
@@ -23,7 +23,7 @@ void vec4_copy(float* dst, float* a) {
  * @param {Number} z Z component
  * @param {Number} w W component
  */
-void vec4_set(float* dst, float x, float y, float z, float w) {
+void vec4_set(vec4 dst, float x, float y, float z, float w) {
     dst[0] = x;
     dst[1] = y;
     dst[2] = z;
@@ -37,7 +37,7 @@ void vec4_set(float* dst, float x, float y, float z, float w) {
  * @param {vec4} a the first operand
  * @param {vec4} b the second operand
  */
-void vec4_add(float* dst, float* b) {
+void vec4_add(vec4 dst, vec4 b) {
     dst[0] = dst[0] + b[0];
     dst[1] = dst[1] + b[1];
     dst[2] = dst[2] + b[2];
@@ -51,7 +51,7 @@ void vec4_add(float* dst, float* b) {
  * @param {vec4} a the first operand
  * @param {vec4} b the second operand
  */
-void vec4_subtract(float* dst, float* b) {
+void vec4_subtract(vec4 dst, vec4 b) {
     dst[0] = dst[0] - b[0];
     dst[1] = dst[1] - b[1];
     dst[2] = dst[2] - b[2];
@@ -65,7 +65,7 @@ void vec4_subtract(float* dst, float* b) {
  * @param {vec4} a the first operand
  * @param {vec4} b the second operand
  */
-void vec4_multiply(float* dst, float* b) {
+void vec4_multiply(vec4 dst, vec4 b) {
     dst[0] = dst[0] * b[0];
     dst[1] = dst[1] * b[1];
     dst[2] = dst[2] * b[2];
@@ -79,7 +79,7 @@ void vec4_multiply(float* dst, float* b) {
  * @param {vec4} a the first operand
  * @param {vec4} b the second operand
  */
-void vec4_divide(float* dst, float* b) {
+void vec4_divide(vec4 dst, vec4 b) {
     dst[0] = dst[0] / b[0];
     dst[1] = dst[1] / b[1];
     dst[2] = dst[2] / b[2];
@@ -92,7 +92,7 @@ void vec4_divide(float* dst, float* b) {
  * @param {vec4} out the receiving vector
  * @param {vec4} a vector to ceil
  */
-void vec4_ceil(float* dst) {
+void vec4_ceil(vec4 dst) {
     dst[0] = ceilf(dst[0]);
     dst[1] = ceilf(dst[1]);
     dst[2] = ceilf(dst[2]);
@@ -105,7 +105,7 @@ void vec4_ceil(float* dst) {
  * @param {vec4} out the receiving vector
  * @param {vec4} a vector to floor
  */
-void vec4_floor(float* dst) {
+void vec4_floor(vec4 dst) {
     dst[0] = floorf(dst[0]);
     dst[1] = floorf(dst[1]);
     dst[2] = floorf(dst[2]);
@@ -119,7 +119,7 @@ void vec4_floor(float* dst) {
  * @param {vec4} a the first operand
  * @param {vec4} b the second operand
  */
-void vec4_min(float* dst, float* b) {
+void vec4_min(vec4 dst, vec4 b) {
     dst[0] = fmin(dst[0], b[0]);
     dst[1] = fmin(dst[1], b[1]);
     dst[2] = fmin(dst[2], b[2]);
@@ -133,7 +133,7 @@ void vec4_min(float* dst, float* b) {
  * @param {vec4} a the first operand
  * @param {vec4} b the second operand
  */
-void vec4_max(float* dst, float* b) {
+void vec4_max(vec4 dst, vec4 b) {
     dst[0] = fmax(dst[0], b[0]);
     dst[1] = fmax(dst[1], b[1]);
     dst[2] = fmax(dst[2], b[2]);
@@ -146,7 +146,7 @@ void vec4_max(float* dst, float* b) {
  * @param {vec4} out the receiving vector
  * @param {vec4} a vector to round
  */
-void vec4_round(float* dst) {
+void vec4_round(vec4 dst) {
     dst[0] = roundf(dst[0]);
     dst[1] = roundf(dst[1]);
     dst[2] = roundf(dst[2]);
@@ -160,7 +160,7 @@ void vec4_round(float* dst) {
  * @param {vec4} a the vector to scale
  * @param {Number} b amount to scale the vector by
  */
-void vec4_scale(float* dst, float b) {
+void vec4_scale(vec4 dst, float b) {
     dst[0] = dst[0] * b;
     dst[1] = dst[1] * b;
     dst[2] = dst[2] * b;
@@ -174,7 +174,7 @@ void vec4_scale(float* dst, float b) {
  * @param {vec4} b the second operand
  * @param {Number} scale the amount to scale b by before adding
  */
-void vec4_scaleAndAdd(float* dst, float* b, float scale) {
+void vec4_scaleAndAdd(vec4 dst, vec4 b, float scale) {
     dst[0] = dst[0] + (b[0] * scale);
     dst[1] = dst[1] + (b[1] * scale);
     dst[2] = dst[2] + (b[2] * scale);
@@ -188,7 +188,7 @@ void vec4_scaleAndAdd(float* dst, float* b, float scale) {
  * @param {vec4} b the second operand
  * @returns {Number} distance between a and b
  */
-float vec4_distance(float* a, float* b) {
+float vec4_distance(vec4 a, vec4 b) {
     float x = b[0] - a[0];
     float y = b[1] - a[1];
     float z = b[2] - a[2];
@@ -203,7 +203,7 @@ float vec4_distance(float* a, float* b) {
  * @param {vec4} b the second operand
  * @returns {Number} squared distance between a and b
  */
-float vec4_squaredDistance(float* a, float* b) {
+float vec4_squaredDistance(vec4 a, vec4 b) {
     float x = b[0] - a[0];
     float y = b[1] - a[1];
     float z = b[2] - a[2];
@@ -217,7 +217,7 @@ float vec4_squaredDistance(float* a, float* b) {
  * @param {vec4} a vector to calculate length of
  * @returns {Number} length of a
  */
-float vec4_length(float* a) {
+float vec4_length(vec4 a) {
     float x = a[0];
     float y = a[1];
     float z = a[2];
@@ -231,7 +231,7 @@ float vec4_length(float* a) {
  * @param {vec4} a vector to calculate squared length of
  * @returns {Number} squared length of a
  */
-float vec4_squaredLength(float* a) {
+float vec4_squaredLength(vec4 a) {
     float x = a[0];
     float y = a[1];
     float z = a[2];
@@ -245,7 +245,7 @@ float vec4_squaredLength(float* a) {
  * @param {vec4} out the receiving vector
  * @param {vec4} a vector to negate
  */
-void vec4_negate(float* dst) {
+void vec4_negate(vec4 dst) {
     dst[0] = -dst[0];
     dst[1] = -dst[1];
     dst[2] = -dst[2];
@@ -258,7 +258,7 @@ void vec4_negate(float* dst) {
  * @param {vec4} out the receiving vector
  * @param {vec4} a vector to invert
  */
-void vec4_inverse(float* dst) {
+void vec4_inverse(vec4 dst) {
     dst[0] = 1.0 / dst[0];
     dst[1] = 1.0 / dst[1];
     dst[2] = 1.0 / dst[2];
@@ -271,7 +271,7 @@ void vec4_inverse(float* dst) {
  * @param {vec4} out the receiving vector
  * @param {vec4} a vector to normalize
  */
-void vec4_normalize(float* dst) {
+void vec4_normalize(vec4 dst) {
     float x = dst[0];
     float y = dst[1];
     float z = dst[2];
@@ -293,7 +293,7 @@ void vec4_normalize(float* dst) {
  * @param {vec4} b the second operand
  * @returns {Number} dot product of a and b
  */
-float vec4_dot(float* a, float* b) {
+float vec4_dot(vec4 a, vec4 b) {
     return a[0] * b[0] + a[1] * b[1] + a[2] * b[2] + a[3] * b[3];
 }
 
@@ -304,7 +304,7 @@ float vec4_dot(float* a, float* b) {
  * @param {vec4} b the second operand
  * @param {Number} t interpolation amount, in the range [0-1], between the two inputs
  */
-void vec4_lerp(float* dst, float* b, float t) {
+void vec4_lerp(vec4 dst, vec4 b, float t) {
     float ax = dst[0];
     float ay = dst[1];
     float az = dst[2];
@@ -321,7 +321,7 @@ void vec4_lerp(float* dst, float* b, float t) {
  * @param {vec4} out the receiving vector
  * @param {mat4} m matrix to transform with
  */
-void vec4_transformMat4(float* dst, float* m) {
+void vec4_transformMat4(vec4 dst, mat4 m) {
     float x = dst[0], y = dst[1], z = dst[2], w = dst[3];
     dst[0] = m[0] * x + m[4] * y + m[8] * z + m[12] * w;
     dst[1] = m[1] * x + m[5] * y + m[9] * z + m[13] * w;
@@ -335,7 +335,7 @@ void vec4_transformMat4(float* dst, float* m) {
  * @param {vec4} out the receiving vector
  * @param {quat} q quaternion to transform with
  */
-void vec4_transformQuat(float* dst, float* q) {
+void vec4_transformQuat(vec4 dst, quat q) {
     float x = dst[0], y = dst[1], z = dst[2];
     float qx = q[0], qy = q[1], qz = q[2], qw = q[3];
 
@@ -359,6 +359,6 @@ void vec4_transformQuat(float* dst, float* q) {
  * @param {vec4} b The second vector.
  * @returns {Boolean} True if the vectors are equal, false otherwise.
  */
-uint8_t vec4_equals(float* a, float* b) {
+uint8_t vec4_equals(vec4 a, vec4 b) {
     return a[0] == b[0] && a[1] == b[1] && a[2] == b[2] && a[3] == b[3];
 }

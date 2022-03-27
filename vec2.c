@@ -7,7 +7,7 @@
  * @param {vec2} out the receiving vector
  * @param {vec2} a the source vector
  */
-void vec2_copy(float* dst, float* a) {
+void vec2_copy(vec2 dst, vec2 a) {
     dst[0] = a[0];
     dst[1] = a[1];
 }
@@ -19,7 +19,7 @@ void vec2_copy(float* dst, float* a) {
  * @param {Number} x X component
  * @param {Number} y Y component
  */
-void vec2_set(float* dst, float x, float y) {
+void vec2_set(vec2 dst, float x, float y) {
     dst[0] = x;
     dst[1] = y;
 }
@@ -30,7 +30,7 @@ void vec2_set(float* dst, float x, float y) {
  * @param {vec2} out the receiving vector
  * @param {vec2} b the second operand
  */
-void vec2_add(float* dst, float* b) {
+void vec2_add(vec2 dst, vec2 b) {
     dst[0] = dst[0] + b[0];
     dst[1] = dst[1] + b[1];
 }
@@ -41,7 +41,7 @@ void vec2_add(float* dst, float* b) {
  * @param {vec2} out the receiving vector
  * @param {vec2} b the second operand
  */
-void vec2_subtract(float* dst, float* b) {
+void vec2_subtract(vec2 dst, vec2 b) {
     dst[0] = dst[0] - b[0];
     dst[1] = dst[1] - b[1];
 }
@@ -52,7 +52,7 @@ void vec2_subtract(float* dst, float* b) {
  * @param {vec2} out the receiving vector
  * @param {vec2} b the second operand
  */
-void vec2_multiply(float* dst, float* b) {
+void vec2_multiply(vec2 dst, vec2 b) {
     dst[0] = dst[0] * b[0];
     dst[1] = dst[1] * b[1];
 }
@@ -63,7 +63,7 @@ void vec2_multiply(float* dst, float* b) {
  * @param {vec2} out the receiving vector
  * @param {vec2} b the second operand
  */
-void vec2_divide(float* dst, float* b) {
+void vec2_divide(vec2 dst, vec2 b) {
     dst[0] = dst[0] / b[0];
     dst[1] = dst[1] / b[1];
 }
@@ -73,7 +73,7 @@ void vec2_divide(float* dst, float* b) {
  *
  * @param {vec2} out the receiving vector
  */
-void vec2_ceil(float* dst) {
+void vec2_ceil(vec2 dst) {
     dst[0] = ceilf(dst[0]);
     dst[1] = ceilf(dst[1]);
 }
@@ -83,7 +83,7 @@ void vec2_ceil(float* dst) {
  *
  * @param {vec2} out the receiving vector
  */
-void vec2_floor(float* dst) {
+void vec2_floor(vec2 dst) {
     dst[0] = floorf(dst[0]);
     dst[1] = floorf(dst[1]);
 }
@@ -94,7 +94,7 @@ void vec2_floor(float* dst) {
  * @param {vec2} out the receiving vector
  * @param {vec2} b the second operand
  */
-void vec2_min(float* dst, float* b) {
+void vec2_min(vec2 dst, vec2 b) {
     dst[0] = fmin(dst[0], b[0]);
     dst[1] = fmin(dst[1], b[1]);
 }
@@ -105,7 +105,7 @@ void vec2_min(float* dst, float* b) {
  * @param {vec2} out the receiving vector
  * @param {vec2} b the second operand
  */
-void vec2_max(float* dst, float* b) {
+void vec2_max(vec2 dst, vec2 b) {
     dst[0] = fmax(dst[0], b[0]);
     dst[1] = fmax(dst[1], b[1]);
 }
@@ -115,7 +115,7 @@ void vec2_max(float* dst, float* b) {
  *
  * @param {vec2} out the receiving vector
  */
-void vec2_round(float* dst) {
+void vec2_round(vec2 dst) {
     dst[0] = roundf(dst[0]);
     dst[1] = roundf(dst[1]);
 }
@@ -126,7 +126,7 @@ void vec2_round(float* dst) {
  * @param {vec2} out the receiving vector
  * @param {Number} b amount to scale the vector by
  */
-void vec2_scale(float* dst, float b) {
+void vec2_scale(vec2 dst, float b) {
     dst[0] = dst[0] * b;
     dst[1] = dst[1] * b;
 }
@@ -138,7 +138,7 @@ void vec2_scale(float* dst, float b) {
  * @param {vec2} b the second operand
  * @param {Number} scale the amount to scale b by before adding
  */
-void vec2_scaleAndAdd(float* dst, float* b, float scale) {
+void vec2_scaleAndAdd(vec2 dst, vec2 b, float scale) {
     dst[0] = dst[0] + (b[0] * scale);
     dst[1] = dst[1] + (b[1] * scale);
 }
@@ -150,7 +150,7 @@ void vec2_scaleAndAdd(float* dst, float* b, float scale) {
  * @param {vec2} b the second operand
  * @returns {Number} distance between a and b
  */
-float vec2_distance(float* a, float* b) {
+float vec2_distance(vec2 a, vec2 b) {
     float x = b[0] - a[0], y = b[1] - a[1];
     return sqrtf(x*x + y*y);
 }
@@ -162,7 +162,7 @@ float vec2_distance(float* a, float* b) {
  * @param {vec2} b the second operand
  * @returns {Number} squared distance between a and b
  */
-float vec2_squaredDistance(float* a, float* b) {
+float vec2_squaredDistance(vec2 a, vec2 b) {
     float x = b[0] - a[0], y = b[1] - a[1];
     return x*x + y*y;
 }
@@ -173,7 +173,7 @@ float vec2_squaredDistance(float* a, float* b) {
  * @param {vec2} a vector to calculate length of
  * @returns {Number} length of a
  */
-float vec2_length(float* a) {
+float vec2_length(vec2 a) {
     float x = a[0], y = a[1];
     return sqrtf(x*x + y*y);
 }
@@ -184,7 +184,7 @@ float vec2_length(float* a) {
  * @param {vec2} a vector to calculate squared length of
  * @returns {Number} squared length of a
  */
-float vec2_squaredLength(float* a) {
+float vec2_squaredLength(vec2 a) {
     float x = a[0], y = a[1];
     return x*x + y*y;
 }
@@ -196,7 +196,7 @@ float vec2_squaredLength(float* a) {
  * @param {vec2} a vector to negate
  * @returns {vec2} out
  */
-void vec2_negate(float* dst) {
+void vec2_negate(vec2 dst) {
     dst[0] = -dst[0];
     dst[1] = -dst[1];
 }
@@ -206,7 +206,7 @@ void vec2_negate(float* dst) {
  *
  * @param {vec2} out the receiving vector
  */
-void vec2_inverse(float* dst) {
+void vec2_inverse(vec2 dst) {
     dst[0] = 1.0 / dst[0];
     dst[1] = 1.0 / dst[1];
 }
@@ -216,7 +216,7 @@ void vec2_inverse(float* dst) {
  *
  * @param {vec2} out the receiving vector
  */
-void vec2_normalize(float* dst) {
+void vec2_normalize(vec2 dst) {
     float x = dst[0], y = dst[1];
     float len = x*x + y*y;
     if (len > 0) {
@@ -233,7 +233,7 @@ void vec2_normalize(float* dst) {
  * @param {vec2} b the second operand
  * @returns {Number} dot product of a and b
  */
-float vec2_dot(float* a, float* b) {
+float vec2_dot(vec2 a, vec2 b) {
     return a[0] * b[0] + a[1] * b[1];
 }
 
@@ -244,7 +244,7 @@ float vec2_dot(float* a, float* b) {
  * @param {vec3} out the receiving vector
  * @param {vec2} b the second operand
  */
-void vec2_cross(float* dst, float* b) {
+void vec2_cross(vec3 dst, vec2 b) {
     float z = dst[0] * b[1] - dst[1] * b[0];
     dst[0] = dst[1] = 0;
     dst[2] = z;
@@ -257,7 +257,7 @@ void vec2_cross(float* dst, float* b) {
  * @param {vec2} b the second operand
  * @param {Number} t interpolation amount, in the range [0-1], between the two inputs
  */
-void vec2_lerp(float* dst, float* b, float t) {
+void vec2_lerp(vec2 dst, vec2 b, float t) {
     float ax = dst[0], ay = dst[1];
     dst[0] = ax + t * (b[0] - ax);
     dst[1] = ay + t * (b[1] - ay);
@@ -269,7 +269,7 @@ void vec2_lerp(float* dst, float* b, float t) {
  * @param {vec2} out the receiving vector
  * @param {mat2} m matrix to transform with
  */
-void vec2_transformMat2(float* dst, float* m) {
+void vec2_transformMat2(vec2 dst, mat2 m) {
     float x = dst[0], y = dst[1];
     dst[0] = m[0] * x + m[2] * y;
     dst[1] = m[1] * x + m[3] * y;
@@ -281,7 +281,7 @@ void vec2_transformMat2(float* dst, float* m) {
  * @param {vec2} out the receiving vector
  * @param {mat2d} m matrix to transform with
  */
-void vec2_transformMat2d(float* dst, float* m) {
+void vec2_transformMat2d(vec2 dst, mat2 m) {
     float x = dst[0], y = dst[1];
     dst[0] = m[0] * x + m[2] * y + m[4];
     dst[1] = m[1] * x + m[3] * y + m[5];
@@ -294,7 +294,7 @@ void vec2_transformMat2d(float* dst, float* m) {
  * @param {vec2} out the receiving vector
  * @param {mat3} m matrix to transform with
  */
-void vec2_transformMat3(float* dst, float* m) {
+void vec2_transformMat3(vec2 dst, mat3 m) {
     float x = dst[0], y = dst[1];
     dst[0] = m[0] * x + m[3] * y + m[6];
     dst[1] = m[1] * x + m[4] * y + m[7];
@@ -309,7 +309,7 @@ void vec2_transformMat3(float* dst, float* m) {
  * @param {vec2} a the vector to transform
  * @param {mat4} m matrix to transform with
  */
-void vec2_transformMat4(float* dst, float* m) {
+void vec2_transformMat4(vec2 dst, mat4 m) {
     float x = dst[0];
     float y = dst[1];
     dst[0] = m[0] * x + m[4] * y + m[12];
@@ -322,7 +322,7 @@ void vec2_transformMat4(float* dst, float* m) {
  * @param {vec2} b The origin of the rotation
  * @param {Number} c The angle of rotation
  */
-void vec2_rotate(float* dst, float* b, float c) {
+void vec2_rotate(vec2 dst, vec2 b, float c) {
     //Translate point to the origin
     float p0 = dst[0] - b[0],
     p1 = dst[1] - b[1],
@@ -340,7 +340,7 @@ void vec2_rotate(float* dst, float* b, float c) {
  * @param {vec2} b The second operand
  * @returns {Number} The angle in radians
  */
-float vec2_angle(float* a, float* b) {
+float vec2_angle(vec2 a, vec2 b) {
     float x1 = a[0],
         y1 = a[1],
         x2 = b[0],
@@ -377,6 +377,6 @@ float vec2_angle(float* a, float* b) {
  * @param {vec2} b The second vector.
  * @returns {Boolean} True if the vectors are equal, false otherwise.
  */
-uint8_t vec2_exactEquals(float* a, float* b) {
+uint8_t vec2_exactEquals(vec2 a, vec2 b) {
     return a[0] == b[0] && a[1] == b[1];
 }

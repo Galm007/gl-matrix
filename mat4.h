@@ -2,20 +2,21 @@
 #define MAT4_H
 
 #include <stdint.h>
+#include "typedefs.h"
 
 /**
  * Print a mat4 matrix to stderr
  *
  * @param {mat4} the matrix to dump
  */
-void mat4_dump(float dst[16]);
+void mat4_dump(mat4 dst);
 
 /**
  * Set a mat4 to the identity matrix
  *
  * @param {mat4} out the receiving matrix
  */
-void mat4_identity(float dst[16]);
+void mat4_identity(mat4 dst);
 
 /**
  * Copy the values from one mat4 to another
@@ -23,7 +24,7 @@ void mat4_identity(float dst[16]);
  * @param {mat4} out the receiving matrix
  * @param {mat4} a the source matrix
  */
-void mat4_copy(float* dst, float* src);
+void mat4_copy(mat4 dst, mat4 src);
 
 /**
  * Set the components of a mat4 to the given values
@@ -46,28 +47,28 @@ void mat4_copy(float* dst, float* src);
  * @param {Number} m32 Component in column 3, row 2 position (index 14)
  * @param {Number} m33 Component in column 3, row 3 position (index 15)
  */
-void mat4_set(float* dst, float m00, float m01, float m02, float m03, float m10, float m11, float m12, float m13, float m20, float m21, float m22, float m23, float m30, float m31, float m32, float m33);
+void mat4_set(mat4 dst, float m00, float m01, float m02, float m03, float m10, float m11, float m12, float m13, float m20, float m21, float m22, float m23, float m30, float m31, float m32, float m33);
 
 /**
  * Transpose the values of a mat4
  *
  * @param {mat4} out the receiving matrix
  */
-void mat4_transpose(float* dst);
+void mat4_transpose(mat4 dst);
 
 /**
  * Inverts a mat4
  *
  * @param {mat4} out the receiving matrix
  */
-void mat4_invert(float* dst);
+void mat4_invert(mat4 dst);
 
 /**
  * Calculates the adjugate of a mat4
  *
  * @param {mat4} out the receiving matrix
  */
-void mat4_adjoint(float* dst);
+void mat4_adjoint(mat4 dst);
 
 /**
  * Calculates the determinant of a mat4
@@ -75,7 +76,7 @@ void mat4_adjoint(float* dst);
  * @param {mat4} a the source matrix
  * @returns {Number} determinant of a
  */
-float mat4_determinant(float* dst);
+float mat4_determinant(mat4 dst);
 
 /**
  * Multiplies two mat4s
@@ -83,7 +84,7 @@ float mat4_determinant(float* dst);
  * @param {mat4} out the receiving matrix
  * @param {mat4} b the first operand
  */
-void mat4_multiply(float* dst, float* b);
+void mat4_multiply(mat4 dst, mat4 b);
 
 /**
  * Translate a mat4 by the given vector
@@ -91,7 +92,7 @@ void mat4_multiply(float* dst, float* b);
  * @param {mat4} out the receiving matrix
  * @param {vec3} v vector to translate by
  */
-void mat4_translate(float dst[16], float v[3]);
+void mat4_translate(mat4 dst, vec3 v);
 
 /**
  * Translate a mat4 by the given flat 4 floats
@@ -101,7 +102,7 @@ void mat4_translate(float dst[16], float v[3]);
  * @param {y} Y translation
  * @param {z} Z translation
  */
-void mat4_translatef(float dst[16], float x, float y, float z);
+void mat4_translatef(mat4 dst, float x, float y, float z);
 
 /**
  * Scales the mat4 by the dimensions in the given vec3 not using vectorization
@@ -109,7 +110,7 @@ void mat4_translatef(float dst[16], float x, float y, float z);
  * @param {mat4} out the receiving matrix
  * @param {vec3} v the vec3 to scale the matrix by
  **/
-void mat4_scale(float* dst, float* v);
+void mat4_scale(mat4 dst, vec3 v);
 
 /**
  * Rotates a mat4 by the given angle around the given axis
@@ -118,7 +119,7 @@ void mat4_scale(float* dst, float* v);
  * @param {Number} rad the angle to rotate the matrix by
  * @param {vec3} axis the axis to rotate around
  */
-void mat4_rotate(float* dst, float rad, float* axis);
+void mat4_rotate(mat4 dst, float rad, vec3 axis);
 
 /**
  * Rotates a matrix by the given angle around the X axis
@@ -126,7 +127,7 @@ void mat4_rotate(float* dst, float rad, float* axis);
  * @param {mat4} out the receiving matrix
  * @param {Number} rad the angle to rotate the matrix by
  */
-void mat4_rotateX(float* dst, float rad);
+void mat4_rotateX(mat4 dst, float rad);
 
 /**
  * Rotates a matrix by the given angle around the Y axis
@@ -134,7 +135,7 @@ void mat4_rotateX(float* dst, float rad);
  * @param {mat4} out the receiving matrix
  * @param {Number} rad the angle to rotate the matrix by
  */
-void mat4_rotateY(float* dst, float rad);
+void mat4_rotateY(mat4 dst, float rad);
 
 /**
  * Rotates a matrix by the given angle around the Z axis
@@ -142,7 +143,7 @@ void mat4_rotateY(float* dst, float rad);
  * @param {mat4} out the receiving matrix
  * @param {Number} rad the angle to rotate the matrix by
  */
-void mat4_rotateZ(float* dst, float rad);
+void mat4_rotateZ(mat4 dst, float rad);
 
 /**
  * Initializes a matrix from a vector translation
@@ -154,7 +155,7 @@ void mat4_rotateZ(float* dst, float rad);
  * @param {mat4} out mat4 receiving operation result
  * @param {vec3} v Translation vector
  */
-void mat4_fromTranslation(float* dst, float* v);
+void mat4_fromTranslation(mat4 dst, vec3 v);
 
 /**
  * Initializes a matrix from a vector scaling
@@ -166,7 +167,7 @@ void mat4_fromTranslation(float* dst, float* v);
  * @param {mat4} out mat4 receiving operation result
  * @param {vec3} v Scaling vector
  */
-void mat4_fromScaling(float* dst, float* v);
+void mat4_fromScaling(mat4 dst, vec3 v);
 
 /**
  * Initializes a matrix from a given angle around a given axis
@@ -179,7 +180,7 @@ void mat4_fromScaling(float* dst, float* v);
  * @param {Number} rad the angle to rotate the matrix by
  * @param {vec3} axis the axis to rotate around
  */
-void mat4_fromRotation(float* dst, float rad, float* axis);
+void mat4_fromRotation(mat4 dst, float rad, vec3 axis);
 
 /**
  * Initializes a matrix from the given angle around the X axis
@@ -191,7 +192,7 @@ void mat4_fromRotation(float* dst, float rad, float* axis);
  * @param {mat4} out mat4 receiving operation result
  * @param {Number} rad the angle to rotate the matrix by
  */
-void mat4_fromXRotation(float* dst, float rad);
+void mat4_fromXRotation(mat4 dst, float rad);
 
 /**
  * Initializes a matrix from the given angle around the Y axis
@@ -203,7 +204,7 @@ void mat4_fromXRotation(float* dst, float rad);
  * @param {mat4} out mat4 receiving operation result
  * @param {Number} rad the angle to rotate the matrix by
  */
-void mat4_fromYRotation(float* dst, float rad);
+void mat4_fromYRotation(mat4 dst, float rad);
 
 /**
  * Initializes a matrix from the given angle around the Z axis
@@ -215,7 +216,7 @@ void mat4_fromYRotation(float* dst, float rad);
  * @param {mat4} out mat4 receiving operation result
  * @param {Number} rad the angle to rotate the matrix by
  */
-void mat4_fromZRotation(float* dst, float rad);
+void mat4_fromZRotation(mat4 dst, float rad);
 
 /**
  * Initializes a matrix from a quaternion rotation and vector translation
@@ -231,15 +232,7 @@ void mat4_fromZRotation(float* dst, float rad);
  * @param {quat4} q Rotation quaternion
  * @param {vec3} v Translation vector
  */
-void mat4_fromRotationTranslation(float* dst, float* q, float* v);
-
-/**
- * Creates a new mat4 from a dual quat.
- *
- * @param {mat4} out Matrix
- * @param {quat2} a Dual Quaternion
- */
-void mat4_fromQuat2(float* dst, float* a);
+void mat4_fromRotationTranslation(mat4 dst, quat q, vec3 v);
 
 /**
  * Returns the translation vector component of a transformation
@@ -249,7 +242,7 @@ void mat4_fromQuat2(float* dst, float* a);
  * @param  {vec3} out Vector to receive translation component
  * @param  {mat4} mat Matrix to be decomposed (input)
  */
-void mat4_getTranslation(float* dst, float* mat);
+void mat4_getTranslation(vec3 dst, mat4 mat);
 
 /**
  * Returns the scaling factor component of a transformation
@@ -260,7 +253,7 @@ void mat4_getTranslation(float* dst, float* mat);
  * @param  {vec3} out Vector to receive scaling factor component
  * @param  {mat4} mat Matrix to be decomposed (input)
  */
-void mat4_getScaling(float* dst, float* mat);
+void mat4_getScaling(vec3 dst, mat4 mat);
 
 /**
  * Returns a quaternion representing the rotational component
@@ -270,7 +263,7 @@ void mat4_getScaling(float* dst, float* mat);
  * @param {quat} out Quaternion to receive the rotation component
  * @param {mat4} mat Matrix to be decomposed (input)
  */
-void mat4_getRotation(float* dst, float* mat);
+void mat4_getRotation(quat dst, mat4 mat);
 
 /**
  * Initializes a matrix from a quaternion rotation, vector translation and vector scale
@@ -288,7 +281,7 @@ void mat4_getRotation(float* dst, float* mat);
  * @param {vec3} v Translation vector
  * @param {vec3} s Scaling vector
  */
-void mat4_fromRotationTranslationScale(float* dst, float* q, float* v, float* s);
+void mat4_fromRotationTranslationScale(mat4 dst, quat q, vec3 v, vec3 s);
 
 /**
  * Initializes a matrix from a quaternion rotation, vector translation and vector scale, rotating and scaling around the given origin
@@ -309,7 +302,7 @@ void mat4_fromRotationTranslationScale(float* dst, float* q, float* v, float* s)
  * @param {vec3} s Scaling vector
  * @param {vec3} o The origin vector around which to scale and rotate
  */
-void mat4_fromRotationTranslationScaleOrigin(float* dst, float* q, float* v, float* s, float* o);
+void mat4_fromRotationTranslationScaleOrigin(mat4 dst, quat q, vec3 v, vec3 s, vec3 o);
 
 /**
  * Calculates a 4x4 matrix from the given quaternion
@@ -319,7 +312,7 @@ void mat4_fromRotationTranslationScaleOrigin(float* dst, float* q, float* v, flo
  *
  * @returns {mat4} out
  */
-void mat4_fromQuat(float* dst, float* q);
+void mat4_fromQuat(mat4 dst, quat q);
 
 /**
  * Generates a frustum matrix with the given bounds
@@ -332,7 +325,7 @@ void mat4_fromQuat(float* dst, float* q);
  * @param {Number} near Near bound of the frustum
  * @param {Number} far Far bound of the frustum
  */
-void mat4_frustum(float* dst, float left, float right, float bottom, float top, float near, float far);
+void mat4_frustum(mat4 dst, float left, float right, float bottom, float top, float near, float far);
 
 /**
  * Generates a perspective projection matrix with the given bounds.
@@ -344,7 +337,7 @@ void mat4_frustum(float* dst, float left, float right, float bottom, float top, 
  * @param {number} near Near bound of the frustum
  * @param {number} far Far bound of the frustum, can be 0 or FLT_MAX
  */
-void mat4_perspective(float* dst, float fovy, float aspect, float near, float far);
+void mat4_perspective(mat4 dst, float fovy, float aspect, float near, float far);
 
 /**
  * Generates a orthogonal projection matrix with the given bounds
@@ -357,7 +350,7 @@ void mat4_perspective(float* dst, float fovy, float aspect, float near, float fa
  * @param {number} near Near bound of the frustum
  * @param {number} far Far bound of the frustum
  */
-void mat4_ortho(float* dst, float left, float right, float bottom, float top, float near, float far);
+void mat4_ortho(mat4 dst, float left, float right, float bottom, float top, float near, float far);
 
 /**
  * Generates a look-at matrix with the given eye position, focal point, and up axis.
@@ -369,7 +362,7 @@ void mat4_ortho(float* dst, float left, float right, float bottom, float top, fl
  * @param {vec3} up vec3 pointing up
  * @returns {mat4} out
  */
-void mat4_lookAt(float* dst, float* eye, float* center, float* up);
+void mat4_lookAt(mat4 dst, vec3 eye, vec3 center, vec3 up);
 
 /**
  * Generates a matrix that makes something look at something else.
@@ -380,7 +373,7 @@ void mat4_lookAt(float* dst, float* eye, float* center, float* up);
  * @param {vec3} up vec3 pointing up
  * @returns {mat4} out
  */
-void mat4_targetTo(float* dst, float* eye, float* target, float* up);
+void mat4_targetTo(mat4 dst, vec3 eye, vec3 target, vec3 up);
 
 /**
  * Returns Frobenius norm of a mat4
@@ -388,7 +381,7 @@ void mat4_targetTo(float* dst, float* eye, float* target, float* up);
  * @param {mat4} a the matrix to calculate Frobenius norm of
  * @returns {Number} Frobenius norm
  */
-float mat4_frob(float* a);
+float mat4_frob(mat4 a);
 
 /**
  * Adds two mat4's
@@ -396,7 +389,7 @@ float mat4_frob(float* a);
  * @param {mat4} out the receiving matrix
  * @param {mat4} b the second operand
  */
-void mat4_add(float* dst, float* b);
+void mat4_add(mat4 dst, mat4 b);
 
 /**
  * Subtracts matrix b from matrix a
@@ -404,7 +397,7 @@ void mat4_add(float* dst, float* b);
  * @param {mat4} out the receiving matrix
  * @param {mat4} b the second operand
  */
-void mat4_subtract(float* dst, float* b);
+void mat4_subtract(mat4 dst, mat4 b);
 
 /**
  * Multiply each element of the matrix by a scalar.
@@ -412,7 +405,7 @@ void mat4_subtract(float* dst, float* b);
  * @param {mat4} out the receiving matrix
  * @param {Number} b amount to scale the matrix's elements by
  */
-void mat4_multiplyScalar(float* dst, float b);
+void mat4_multiplyScalar(mat4 dst, float b);
 
 /**
  * Adds two mat4's after multiplying each element of the second operand by a scalar value.
@@ -421,7 +414,7 @@ void mat4_multiplyScalar(float* dst, float b);
  * @param {mat4} b the second operand
  * @param {Number} scale the amount to scale b's elements by before adding
  */
-void mat4_multiplyScalarAndAdd(float* dst, float* b, float scale);
+void mat4_multiplyScalarAndAdd(mat4 dst, mat4 b, float scale);
 
 /**
  * Returns whether or not the matrices have exactly the same elements.
@@ -430,6 +423,6 @@ void mat4_multiplyScalarAndAdd(float* dst, float* b, float scale);
  * @param {mat4} b The second matrix.
  * @returns {uint8_t} True if the matrices are equal, false otherwise.
  */
-uint8_t mat4_equals(float* a, float* b);
+uint8_t mat4_equals(mat4 a, mat4 b);
 
 #endif
