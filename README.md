@@ -18,3 +18,5 @@ But with some important differences:
 If you want to produce a new object after performing some operation, first copy that object outside this library (maybe memcpy it) then pass it as arg 1.
 
 The library is very unsafe in that all pointers must be pre-initialized/allocated to the correct size before calling functions. It will blindly set values without checking for NULL pointers and can not check for overflow.
+
+This fork adds typedefs to make it easier to distinguish the data types instead of having to use float* for all of them.
